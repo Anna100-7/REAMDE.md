@@ -1,0 +1,177 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.quiz-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.quiz-card {
+    border: 1px solid #000000;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    text-align: center;
+    position: relative;
+}
+
+.quiz-card h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+}
+
+.quiz-card p {
+    margin: 10px 0;
+    color: #555;
+}
+
+.ellipsis-icon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #555;
+    user-select: none;
+}
+
+.ellipsis-icon:hover {
+    color: #000;
+}
+
+.question {
+    margin-bottom: 20px;
+}
+
+.question label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.question input,
+.question select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.question button {
+    padding: 5px 10px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.question button:hover {
+    background-color: #cc0000;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Стили для интерактивной анкеты */
+#quizContainer .question {
+    margin-bottom: 20px;
+}
+
+#quizContainer label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+#quizContainer input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#quizContainer input[type="radio"],
+#quizContainer input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+#results {
+    margin-top: 20px;
+}
+
+#answersList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#answersList li {
+    margin-bottom: 10px;
+}
+
+/* Стили для интерактивной анкеты */
+#quizContainer .question {
+    margin-bottom: 20px;
+}
+
+#quizContainer label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+#quizContainer input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#quizContainer input[type="radio"],
+#quizContainer input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+#results {
+    margin-top: 20px;
+}
+
+#answersList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#answersList li {
+    margin-bottom: 10px;
+}

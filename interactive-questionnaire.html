@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Questionnaire</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Interactive Questionnaire</h1>
+        <div id="questionnaireContainer"></div>
+        <button onclick="submitAnswers()">Submit Answers</button>
+        <div id="results" style="display: none;">
+            <h2>Results</h2>
+            <ul id="answersList"></ul>
+            <p>Time taken: <span id="timeTaken"></span></p>
+        </div>
+    </div>
+    <script>
+        let startTime;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            startTime = new Date(); // Записываем время начала заполнения анкеты
+            const quizData = JSON.parse(localStorage.getItem('quizData'));
+            const container = document.getElementById('questionnaireContainer');
+
+            if (!quizData || quizData.length === 0) {
+                container.innerHTML = '<p>No questions available. Please create a quiz first.</p>';
+                return;
+            }
+
+            quizData.forEach((question, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+
+                const label = document.createElement('label');
+                label.innerText = `Question ${index + 1}: ${question.question}`;
+                questionDiv.appendChild(label);
+
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.placeholder = 'Enter your answer';
+                input.id = `answer-${index}`;
+                questionDiv.appendChild(input);
+
+                container.appendChild(questionDiv);
+            });
+        });
+
+        function submitAnswers() {
+            const endTime = new Date(); // Записываем время окончания заполнения анкеты
+            const timeDiff = (endTime - startTime) / 1000; // Вычисляем разницу в секундах
+
+            const quizData = JSON.parse(localStorage.getItem('quizData'));
+            const answers = [];
+
+            quizData.forEach((question, index) => {
+                const answerInput = document.getElementById(`answer-${index}`);
+                answers.push({
+                    question: question.question,
+                    answer: answerInput.value
+                });
+            });
+
+            // Сохранение ответов в localStorage
+            localStorage.setItem('quizAnswers', JSON.stringify(answers));
+
+            // Отображение результатов
+            const resultsDiv = document.getElementById('results');
+            const answersList = document.getElementById('answersList');
+            const timeTakenSpan = document.getElementById('timeTaken');
+
+            answersList.innerHTML = ''; // Очищаем список перед добавлением новых ответов
+
+            answers.forEach(answer => {
+                const li = document.createElement('li');
+                li.innerText = `Question: ${answer.question} - Answer: ${answer.answer}`;
+                answersList.appendChild(li);
+            });
+
+            timeTakenSpan.innerText = `${timeDiff} seconds`;
+            resultsDiv.style.display = 'block'; // Показываем блок с результатами
+
+            alert('Answers submitted successfully!');
+        }
+    </script>
+</body>
+
+</html>

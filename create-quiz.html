@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Create Quiz</h1>
+        <div id="questionContainer">
+            <div class="question">
+                <label>Question 1:</label>
+                <input type="text" placeholder="Enter your question">
+                <select>
+                    <option value="text">Text</option>
+                    <option value="single">Single Choice</option>
+                    <option value="multiple">Multiple Choices</option>
+                </select>
+                <button onclick="removeQuestion(this)">Remove</button>
+            </div>
+        </div>
+        <button onclick="addQuestion()">Add Question</button>
+        <button onclick="submitQuiz()">Submit Quiz</button>
+        <button onclick="launchQuiz()">Run</button> <!-- Кнопка "Run" -->
+    </div>
+    <script>
+        function addQuestion() {
+            const container = document.getElementById('questionContainer');
+            const questionCount = container.children.length + 1;
+
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'question';
+
+            const label = document.createElement('label');
+            label.innerText = `Question ${questionCount}:`;
+            questionDiv.appendChild(label);
+
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.placeholder = 'Enter your question';
+            questionDiv.appendChild(input);
+
+            const select = document.createElement('select');
+            const options = ['Text', 'Single Choice', 'Multiple Choices'];
+            options.forEach(option => {
+                const optionElement = document.createElement('option');
+                optionElement.value = option.toLowerCase().replace(' ', '');
+                optionElement.innerText = option;
+                select.appendChild(optionElement);
+            });
+            questionDiv.appendChild(select);
+
+            const removeButton = document.createElement('button');
+            removeButton.innerText = 'Remove';
+            removeButton.onclick = function () {
+                removeQuestion(this);
+            };
+            questionDiv.appendChild(removeButton);
+
+            container.appendChild(questionDiv);
+        }
+
+        function removeQuestion(button) {
+            const questionDiv = button.parentElement;
+            questionDiv.remove();
+        }
+
+        function submitQuiz() {
+            const questions = document.querySelectorAll('.question');
+            const quizData = [];
+
+            questions.forEach(question => {
+                const input = question.querySelector('input');
+                const select = question.querySelector('select');
+                quizData.push({
+                    question: input.value,
+                    type: select.value
+                });
+            });
+
+            // Сохранение данных в localStorage
+            localStorage.setItem('quizData', JSON.stringify(quizData));
+            alert('Quiz submitted successfully!');
+        }
+
+        function launchQuiz() {
+            // Проверка, есть ли данные для анкеты
+            const quizData = JSON.parse(localStorage.getItem('quizData'));
+            if (!quizData || quizData.length === 0) {
+                alert('Сначала создайте анкету!');
+                return;
+            }
+
+            // Перенаправление на страницу интерактивной анкеты
+            window.location.href = "interactive-questionnaire.html";
+        }
+    </script>
+</body>
+
+</html>
